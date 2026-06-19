@@ -2,9 +2,9 @@
 {
     public class GameBoard
     {
-        private string[,] board;
-        private int rows;
-        private int cols;
+        protected string[,] board;
+        protected int rows;
+        protected int cols;
 
         public GameBoard(int rows = 6, int cols = 7)
         {
@@ -13,14 +13,31 @@
             board = new string[rows, cols];
             InitializeBoard();
         }
-
+        //Displays the board
         private void InitializeBoard()
         {
             for (int i = 0; i < rows; i++)
                 for (int j = 0; j < cols; j++)
-                    board[i, j] = "";
+                    board[i, j] = ".";
         }
 
+        //Displays the board
+        public void DisplayBoard()
+        {
+            for (int i = 0; i < rows; i++)
+            {
+                Console.Write(" | ");
+                for (int j = 0; j < cols; j++)
+                {
+                    Console.Write(board[i, j] + " ");
+                }
+                Console.WriteLine("|");
+            }
+            Console.Write("   ");
+            for (int j = 1; j <= cols; j++)
+                Console.Write(j + " ");
+            Console.WriteLine();
+        }
         public string HasWinner()
         {
             string result = null;
@@ -71,7 +88,6 @@
             }
 
             // Column check
-            // Column check
             for (int i = 0; i < cols; i++)
             {
                 for (int j = 0; j < rows - 3; j++)
@@ -101,12 +117,76 @@
 
             return true;
         }
+
+        //public bool UpdateBoard(int col)
+        //{
+
+        //}
     }
+    //class ViewUI : GameBoard
+    //{
+    //    public ViewUI(int rows, int cols):base(rows, cols) {
+    //        InitializeBoard();
+    //    }
+    //    private void InitializeBoard()
+    //    {
+    //        for (int i = 0; i < rows; i++)
+    //            for (int j = 0; j < cols; j++)
+    //                board[i, j] = ".";
+    //    }
+    //    public void DisplayBoard()
+    //    {
+    //        for (int i = 0; i < rows; i++)
+    //        {
+    //            Console.Write("| ");
+    //            for (int j = 0; j < cols; j++)
+    //            {
+    //                Console.Write(board[i, j] + " ");
+    //            }
+    //            Console.WriteLine("|");
+    //        }
+    //        for (int j = 1; j <= cols; j++)
+    //            Console.Write(j + " ");
+    //        Console.WriteLine();
+    //    }
+    //}
+    class Players
+    {
+        public char Player { get; set; }
+        public int Turns { get; set; }
+
+        public Players (char player, int turns)
+        {
+            Player = player;
+            Turns = turns;
+        }
+
+        public char playerTurn()
+        {
+            Turns++;
+            if (Turns % 2 == 1)
+            {
+                return Player = 'X';
+            }
+            else
+            {
+                return Player = 'O';
+            }
+        }
+
+        public bool TakeTurn(GameBoard board, int col)
+        {
+            return true;
+        }
+    }
+
+    
         internal class Program
         {
             static void Main(string[] args)
             {
-
+              GameBoard board = new GameBoard();
+            board.DisplayBoard();
             }
         }
 }
